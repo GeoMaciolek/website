@@ -6,14 +6,16 @@
 </script>
 
 <script lang="ts">
-  import type { Changelog } from "../../types/changelog.type";
+  import type { ChangelogEntry as ChangelogEntryType } from "../../types/changelog-entry.type";
+
   import OpenGraph from "../../components/open-graph.svelte";
   import NewsletterSignup from "../../components/blog/newsletter-signup.svelte";
   import "../../assets/markdown-commons.scss";
   import Modal from "../../components/modal.svelte";
   import TwitterFollowButton from "../../components/twitter-follow-button.svelte";
+  import ChangelogEntry from "../../components/changelog/changelog-entry.svelte";
 
-  export let changelogEntries: Changelog[];
+  export let changelogEntries: ChangelogEntryType[];
 
   let isNewsLetterFormShown: boolean = false;
 
@@ -21,28 +23,6 @@
     isNewsLetterFormShown = false;
   };
 </script>
-
-<style type="text/postcss">
-  .content-docs :global(a) {
-    @apply font-normal;
-  }
-
-  .content-docs :global(img) {
-    @apply rounded-3xl;
-  }
-
-  .content-docs :global(h2) {
-    @apply mt-12 mb-4 md:mt-16 !important;
-  }
-
-  .content-docs :global(h3) {
-    @apply mt-12 mb-6 md:mt-16 md:mb-8 !important;
-  }
-
-  .content-docs :global(li) {
-    @apply mt-0 mb-6 md:mb-4;
-  }
-</style>
 
 <OpenGraph
   data={{
@@ -71,20 +51,7 @@
 
 <div class="flex flex-col space-y-x-large md:space-y-xx-large">
   {#each changelogEntries as entry}
-    <div class="flex flex-col md:flex-row">
-      <div class="w-full md:w-4/12">
-        <h2 class="mb-xx-small text-h4">
-          {new Date(Date.parse(entry.date)).toLocaleDateString(undefined, {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </h2>
-      </div>
-      <div class="w-full md:w-8/12 content-docs">
-        {@html entry.content}
-      </div>
-    </div>
+    <ChangelogEntry {entry} />
     <div class="border-b border-gray-300" />
   {/each}
 </div>
