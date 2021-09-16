@@ -55,6 +55,7 @@ export const MENU: MenuEntry[] = [
     M("Prebuilds", "prebuilds"),
     M("Environment Variables", "environment-variables"),
     M("Checkout and Workspace Location", "checkout-location"),
+    M("Browser Settings", "configure/browser-settings"),
   ]),
   M("Develop", "develop", [
     M("One workspace per task", "workspaces"),
