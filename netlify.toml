@@ -3,6 +3,11 @@
   publish = "build/"
   functions = "src/functions"
 
+
+[[redirects]]
+  from = "/community"
+  to = "https://www.gitpod.io/chat"
+
 [[redirects]]
   from = "/security"
   to = "/.well-known/security.txt"
