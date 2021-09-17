@@ -5,6 +5,7 @@
   import type { ChangelogEntry } from "../../types/changelog-entry.type";
   import { stringToBeautifiedFragment } from "../../utils/helpers";
   import ChangelogDate from "./changelog-date.svelte";
+import ChangelogLink from "./changelog-link.svelte";
 
   export let entry: ChangelogEntry;
   export let isAnEntryAlone = $page.path.split("/").length === 3;
@@ -17,6 +18,7 @@
       day: "numeric",
     }
   );
+  const href = `/changelog/${stringToBeautifiedFragment(title)}`
 </script>
 
 <style type="text/postcss">
@@ -44,7 +46,7 @@
 
 <div class="flex flex-col md:flex-row {clazz}" class:entry={isAnEntryAlone}>
   {#if !isAnEntryAlone}
-    <ChangelogDate date={formattedDate} />
+    <ChangelogDate date={formattedDate} {href} />
   {/if}
   <div class="{!isAnEntryAlone ? 'w-full md:w-8/12' : ''} content-docs">
     <img
@@ -59,12 +61,11 @@
       {#if isAnEntryAlone}
         {title}
       {:else}
-        <a
-          href="/changelog/{stringToBeautifiedFragment(title)}"
-          class="no-underline text-black hover:underline active:underline transition-all duration-200"
+        <ChangelogLink
+          {href}
         >
           {title}
-        </a>
+        </ChangelogLink>
       {/if}
     </h2>
     {@html content}
